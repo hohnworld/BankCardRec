@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class DataIOUtils {
     public static File saveImgFile() {
@@ -19,16 +20,19 @@ public class DataIOUtils {
             Log.e("hohnLog", "storage unmounted");
             return null;
         } else {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
-//指定文件名为ocr_日期.jpg
-            String name = "ocr_" + simpleDateFormat.format(new Date(System.currentTimeMillis())) + ".jpg";
-//指定目录是我的文档的相册创建目录photo_ocr
-            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "photo_ocr");
-//创建指定目录
-            dir.mkdir();
-//文件的绝对路径
-            String path = dir.getAbsolutePath() + File.separator + name;
-            File imgFile = new File(path);
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
+////指定文件名为ocr_日期.jpg
+//            String name = "ocr_" + simpleDateFormat.format(new Date(System.currentTimeMillis())) + ".jpg";
+////指定目录是我的文档的相册创建目录photo_ocr
+//            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "photo_ocr");
+////创建指定目录
+//            dir.mkdir();
+////文件的绝对路径
+//            String path = dir.getAbsolutePath() + File.separator + name;
+//            File imgFile = new File(path);
+            String filename = "ocr_"+new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA)
+                    .format(new Date()) + ".jpg";
+            File imgFile = new File(Environment.getExternalStorageDirectory(), filename);
             return imgFile;
         }
     }
